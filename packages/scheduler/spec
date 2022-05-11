@@ -1,0 +1,7 @@
+---
+name: scheduler
+
+dependencies: []
+
+files: 
+  - scheduler/scheduler-*.tar.gz

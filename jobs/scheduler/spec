@@ -1,0 +1,22 @@
+---
+name: scheduler
+
+templates: 
+  bin/ctl.erb: bin/ctl
+  env.erb: env
+
+packages:
+- scheduler
+
+properties: 
+  scheduler.uaa.client_id:
+    description: "Scheduler for OCF UAA Client ID"
+  scheduler.uaa.client_secret:
+    description: "Scheduler for OCF UAA Client Secret"
+  scheduler.uaa.endpoint:
+    description: "Scheduler for OCF UAA Endpoint"
+  scheduler.cf.api:
+    description: "Target CF API Endpoint"
+  scheduler.postgres.uri:
+    description: "Postgres URI (eg. postgres://user:pass@host:port/db...)"
+

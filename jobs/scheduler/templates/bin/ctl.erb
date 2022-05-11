@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+LOG_FILE=/var/vcap/sys/log/scheduler/scheduler.log 
+DATA_PATH=/var/vcap/data/scheduler
+JOB_PATH=/var/vcap/jobs/scheduler
+SCHEDULER_PID=/var/vcap/sys/run/scheduler.pid
+
+cd ${JOB_PATH}
+
+source env
+
+case $1 in
+  (start)
+    echo -n "Starting Scheduler PID: $$"
+    echo $$ > $SCHEDULER_PID
+    exec chpst -u vcap:vcap /var/vcap/packages/scheduler/bin/scheduler \
+      >> ${LOG_FILE} 2>&1 
+    ;;
+  (stop)
+    {
+      echo -n "Stopping Scheduler PID: $(cat $SCHEDULER_PID).."
+      kill_and_wait $SCHEDULER_PID
+      echo " done."
+    } 2>&1 | tee -a ${LOG_FILE}
+    ;;
+  (*)
+    echo "Usage: $0 $1"
+    echo "  start:  Start Scheduler"
+    echo "  stop:   Stop Scheduler"
+esac

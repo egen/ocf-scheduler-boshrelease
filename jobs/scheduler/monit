@@ -1,0 +1,5 @@
+check process scheduler
+  with pidfile "/var/vcap/sys/run/scheduler.pid"
+  start program "/var/vcap/jobs/scheduler/bin/ctl start"
+  stop program "/var/vcap/jobs/scheduler/bin/ctl stop"
+  group vcap
