@@ -7,7 +7,7 @@ SCHEDULER_PID=/var/vcap/sys/run/scheduler.pid
 
 cd ${JOB_PATH}
 
-source env
+source ${JOB_PATH}/env
 
 case $1 in
   (start)
@@ -19,7 +19,7 @@ case $1 in
   (stop)
     {
       echo -n "Stopping Scheduler PID: $(cat $SCHEDULER_PID).."
-      kill_and_wait $SCHEDULER_PID
+      kill -TERM $(cat ${SCHEDULER_PID})
       echo " done."
     } 2>&1 | tee -a ${LOG_FILE}
     ;;
