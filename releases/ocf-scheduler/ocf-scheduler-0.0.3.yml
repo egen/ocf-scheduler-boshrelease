@@ -1,0 +1,17 @@
+name: ocf-scheduler
+version: 0.0.3
+commit_hash: b0e059d
+uncommitted_changes: false
+jobs:
+- name: scheduler
+  version: 715a2b86a497d7e5ac0d7c540831d0f3192559483512763cdac39ab2976290d6
+  fingerprint: 715a2b86a497d7e5ac0d7c540831d0f3192559483512763cdac39ab2976290d6
+  sha1: sha256:c8fb3b6f2381d3f507a1868041984fd6619bf2881218ae6db8f7463a49dc538b
+  packages:
+  - scheduler
+packages:
+- name: scheduler
+  version: 2b951dbacddba347a9b8c948c14ea8a40d38bd19febc3ed665aef8ad5d5680d7
+  fingerprint: 2b951dbacddba347a9b8c948c14ea8a40d38bd19febc3ed665aef8ad5d5680d7
+  sha1: sha256:8c0bca16571401dcca4b2f77a02377d6a1716e665821e12906d889848ae30980
+  dependencies: []
