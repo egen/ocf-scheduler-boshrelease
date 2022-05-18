@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+PATH=$PATH:/var/vcap/packages/cf-cli-8-linux/bin
+PATH=$PATH:/var/vcap/packages/golang-1.18-linux/go/bin
+
+cf uninstall-plugin OCFScheduler || true
+yes | cf install-plugin /var/vcap/packages/scheduler-cf-plugin/bin/scheduler-cf-plugin
+
+# Run all acceptance tests.
+go test -timeout 600s /var/vcap/packages/smoke-tests/acceptance/...

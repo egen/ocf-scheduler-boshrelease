@@ -1,0 +1,11 @@
+---
+name: smoke-tests
+
+dependencies:
+- golang-1.18-linux
+- cf-cli-8-linux
+- scheduler-cf-plugin
+
+# TODO: do we actually need to copy the acceptance tests from the repo here?
+# TODO: should we use git submodules or move tests here?
+files: []

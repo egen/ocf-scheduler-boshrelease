@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -exu
+
+tar xzf golang-1.18-linux.tar.gz
+tar xzf golang-1.18-linux/go*.linux-amd64.tar.gz
+
+cp -R  golang-1.18-linux/go/* ${BOSH_INSTALL_TARGET}
+
+mkdir ${BOSH_INSTALL_TARGET}/bosh
+cp golang-1.18-linux/1.18/runtime.env.linux   ${BOSH_INSTALL_TARGET}/bosh/runtime.env
+cp golang-1.18-linux/1.18/compile.env.linux   ${BOSH_INSTALL_TARGET}/bosh/compile.env
+cp golang-1.18-linux/1.18/compile.env.generic ${BOSH_INSTALL_TARGET}/bosh/compile.env.generic
