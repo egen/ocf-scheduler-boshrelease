@@ -1,12 +1,8 @@
-cf-cli/cf8-cli_8.3.0_linux_x86-64.tgz:
-  size: 8457104
-  sha: sha256:5d2e9b1ef129a84a63f2fc6c429146c7b23ea8dba172a8b1c6f1cb1c8867eb0e
-golang/golang-1.18-linux.tar.gz:
-  size: 141198700
-  sha: sha256:d0d07eb35c966f5f08c925b75f73fd54be10b54a2b1f99085e27644aa0f7f503
-scheduler-cf-plugin/ocf-scheduler-cf-plugin-linux-amd64:
+scheduler-cf-plugin/scheduler-cf-plugin-0.0.2-linux:
   size: 7675642
+  object_id: 12ecda6c-2124-4d4e-4585-cdbacde69a33
   sha: sha256:532602f7c590bde0a9bb05498025d3dc2486c0ce91a8d7787d021cf0f9261402
 scheduler/scheduler-v0.0.9.tar.gz:
   size: 5271175
+  object_id: 35fb19db-6674-410d-78d7-75d38ea58a8e
   sha: sha256:d7025c4aad1583eda968515648ba829a3526c72a3310d6c700682ec65dc1fc74

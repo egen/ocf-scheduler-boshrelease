@@ -5,9 +5,6 @@ templates:
   run: bin/run
   env.erb: env
 
-# bosh vendor-package golang-1.18-linux ../golang-release
-# bosh vendor-package cf-cli-8-linux ../cf-cli-release
-
 packages:
 - smoke-tests
 - golang-1.18-linux

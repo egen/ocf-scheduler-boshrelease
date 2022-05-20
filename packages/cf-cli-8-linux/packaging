@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -exu
-
-tar xzf cf-cli/cf8-cli_8.*_linux_x86-64.tgz
-
-mkdir ${BOSH_INSTALL_TARGET}/bin
-
-cp cf8 ${BOSH_INSTALL_TARGET}/bin/cf
