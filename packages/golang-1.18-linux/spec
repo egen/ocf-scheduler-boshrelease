@@ -2,4 +2,4 @@
 name: golang-1.18-linux
 
 files:
-- golang-1.18-linux.tar.gz
+- golang/golang-1.18-linux.tar.gz

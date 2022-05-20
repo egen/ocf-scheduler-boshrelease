@@ -7,7 +7,6 @@ golang/golang-1.18-linux.tar.gz:
 scheduler-cf-plugin/ocf-scheduler-cf-plugin-linux-amd64:
   size: 7675642
   sha: sha256:532602f7c590bde0a9bb05498025d3dc2486c0ce91a8d7787d021cf0f9261402
-scheduler/scheduler-v0.0.8.tar.gz:
-  size: 5271320
-  object_id: 157cf4af-f2f4-4b4f-6d61-c4097a0041f9
-  sha: sha256:0ce1373c5912bc72c7a08ff0830420840d595dfd3379d6dc33d5d114d60420af
+scheduler/scheduler-v0.0.9.tar.gz:
+  size: 5271175
+  sha: sha256:d7025c4aad1583eda968515648ba829a3526c72a3310d6c700682ec65dc1fc74

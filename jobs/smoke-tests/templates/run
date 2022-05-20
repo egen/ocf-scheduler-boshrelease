@@ -2,11 +2,32 @@
 
 set -e
 
-PATH=$PATH:/var/vcap/packages/cf-cli-8-linux/bin
-PATH=$PATH:/var/vcap/packages/golang-1.18-linux/go/bin
+# Prepare PATH with known bin directories.
+export PATH=$PATH:/var/vcap/packages/cf-cli-8-linux/bin
+export PATH=$PATH:/var/vcap/packages/golang-1.18-linux/bin
 
+echo "==="
+echo "Setting up CF CLI environment..."
+source /var/vcap/jobs/smoke-tests/env
+
+mkdir /var/vcap/jobs/smoke-tests/.cf
+export CF_HOME=/var/vcap/jobs/smoke-tests/.cf
+
+cf api $CF_ENDPOINT --skip-ssl-validation
+cf auth $CF_CLIENT_ID $CF_CLIENT_SECRET --client-credentials
+cf target -o $CF_ORGANIZATION -s $CF_SPACE
+
+echo "==="
+echo "Setting up CF CLI plugin..."
 cf uninstall-plugin OCFScheduler || true
 yes | cf install-plugin /var/vcap/packages/scheduler-cf-plugin/bin/scheduler-cf-plugin
 
-# Run all acceptance tests.
-go test -timeout 600s /var/vcap/packages/smoke-tests/acceptance/...
+echo "==="
+echo "Preparing Go runtime environment..."
+source /var/vcap/packages/golang-1.18-linux/bosh/runtime.env
+export CGO_ENABLED=0
+
+echo "==="
+echo "Running all acceptance tests..."
+cd /var/vcap/packages/smoke-tests
+go test -timeout 600s ./...

@@ -3,15 +3,25 @@ name: smoke-tests
 
 templates:
   run: bin/run
+  env.erb: env
 
-# bosh vendor-package golang-1.18-linux ../../bosh-packages/golang-release
-# bosh vendor-package cf-cli-8-linux ../../bosh-packages/cf-cli-release
+# bosh vendor-package golang-1.18-linux ../golang-release
+# bosh vendor-package cf-cli-8-linux ../cf-cli-release
 
-# TODO: should we upload to the s3 bucket instead of keeping the local copy?
 packages:
 - smoke-tests
 - golang-1.18-linux
 - cf-cli-8-linux
-- ocf-scheduler-cf-plugin # TODO: how to prepare the plugin package?
+- scheduler-cf-plugin
 
-properties: {}
+properties: 
+  cf.api:
+    description: "Target CF API Endpoint"
+  cf.client_id:
+    description: "Target CF Client ID"
+  cf.client_secret:
+    description: "Target CF Client Secret"
+  cf.organization:
+    description: "Target CF Organization"
+  cf.space:
+    description: "Target CF Space"

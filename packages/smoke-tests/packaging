@@ -2,11 +2,7 @@
 
 set -eux
 
-source /var/vcap/packages/golang-1.18-linux/bosh/compile.env
+mkdir ${BOSH_INSTALL_TARGET}/acceptance-tests
 
-# TODO: do we need to compile or copy anything here?
-
-git clone git@github.com:starkandwayne/ocf-scheduler-cf-plugin.git
-git checkout v0.0.2
-
-cp -a ocf-scheduler-cf-plugin/acceptance/* ${BOSH_INSTALL_TARGET}/acceptance
+cp -a acceptance-tests/* ${BOSH_INSTALL_TARGET}/acceptance-tests
+cp go.mod go.sum ${BOSH_INSTALL_TARGET}
