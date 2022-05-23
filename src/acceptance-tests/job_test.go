@@ -7,7 +7,6 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	. "github.com/onsi/gomega/gexec"
 
 	"github.com/cloudfoundry/cf-acceptance-tests/helpers/random_name"
 	"github.com/cloudfoundry/cf-test-helpers/cf"
@@ -23,23 +22,27 @@ var _ = Describe("Scheduler Jobs", func() {
 	})
 
 	AfterEach(func() {
-		Expect(cf.Cf("delete-job", jobName).Wait()).To(Exit(0))
+		Expect(cf.Cf("delete-job", jobName).Wait()).
+			Should(ContainSubstring("OK"))
 	})
 
 	Describe("create-job", func() {
 		It("test correct job creation", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 		})
 	})
 
 	Describe("schedule-job", func() {
 		It("test correct job scheduling", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("schedule-job", jobName, `15 * * * *`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("job-schedules").
 				Wait(time.Second * 10).Out.Contents()).
@@ -50,7 +53,8 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("run-job", func() {
 		It("test correct job manual execution", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("run-job", jobName).
 				Wait(time.Second * 10).Out.Contents()).
@@ -61,10 +65,12 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("delete-job", func() {
 		It("test correct job deletion", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("delete-job", jobName).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("jobs").
 				Wait(time.Second * 10).Out.Contents()).
@@ -79,15 +85,18 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("delete-job-schedule", func() {
 		It("test correct job schedule deletion", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("schedule-job", jobName, `15 * * * *`).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			schedules := cf.Cf("job-schedules").
 				Wait(time.Second * 10)
 
-			Expect(schedules).To(Exit(0))
+			Expect(schedules).
+				Should(ContainSubstring("OK"))
 
 			var schedule string
 			re := regexp.MustCompile(`^(.*?)[\s]+(.*?)[\s]+([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})`)
@@ -102,7 +111,8 @@ var _ = Describe("Scheduler Jobs", func() {
 			Expect(schedule).NotTo(BeEmpty())
 
 			Expect(cf.Cf("delete-job-schedule", jobName, schedule).
-				Wait(time.Second * 10)).To(Exit(0))
+				Wait(time.Second * 10)).
+				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("job-schedules").
 				Wait(time.Second * 10).Out.Contents()).
