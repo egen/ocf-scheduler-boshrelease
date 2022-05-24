@@ -13,9 +13,7 @@ source /var/vcap/jobs/smoke-tests/env
 mkdir /var/vcap/jobs/smoke-tests/.cf
 export CF_HOME=/var/vcap/jobs/smoke-tests/.cf
 
-cf api $CF_ENDPOINT --skip-ssl-validation
-cf auth $CF_CLIENT_ID $CF_CLIENT_SECRET --client-credentials
-cf target -o $CF_ORGANIZATION -s $CF_SPACE
+cf login -a "$CF_ENDPOINT" -u "$CF_USERNAME" -p "$CF_PASSWORD" -o "$CF_ORGANIZATION" -s "$CF_SPACE" --skip-ssl-validation
 
 echo "==="
 echo "Setting up CF CLI plugin..."

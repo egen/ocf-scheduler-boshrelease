@@ -14,10 +14,10 @@ packages:
 properties: 
   cf.api:
     description: "Target CF API Endpoint"
-  cf.client_id:
-    description: "Target CF Client ID"
-  cf.client_secret:
-    description: "Target CF Client Secret"
+  cf.username:
+    description: "Target CF Username"
+  cf.password:
+    description: "Target CF Password"
   cf.organization:
     description: "Target CF Organization"
   cf.space:

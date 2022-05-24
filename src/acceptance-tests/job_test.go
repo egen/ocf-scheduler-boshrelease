@@ -22,14 +22,14 @@ var _ = Describe("Scheduler Jobs", func() {
 	})
 
 	AfterEach(func() {
-		Expect(cf.Cf("delete-job", jobName).Wait()).
-			Should(ContainSubstring("OK"))
+		Expect(cf.Cf("delete-job", jobName).Wait().Out.Contents()).
+			Should(ContainSubstring("Deleted job")) // FIX ME
 	})
 
 	Describe("create-job", func() {
 		It("test correct job creation", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).
+				Wait(time.Second * 10).Out.Contents()).
 				Should(ContainSubstring("OK"))
 		})
 	})
@@ -37,12 +37,12 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("schedule-job", func() {
 		It("test correct job scheduling", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).
+				Wait(time.Second * 10).Out.Contents()).
 				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("schedule-job", jobName, `15 * * * *`).
-				Wait(time.Second * 10)).
-				Should(ContainSubstring("OK"))
+				Wait(time.Second * 10).Out.Contents()).
+				Should(ContainSubstring(jobName))
 
 			Expect(cf.Cf("job-schedules").
 				Wait(time.Second * 10).Out.Contents()).
@@ -53,7 +53,7 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("run-job", func() {
 		It("test correct job manual execution", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).
+				Wait(time.Second * 10).Out.Contents()).
 				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("run-job", jobName).
@@ -65,38 +65,43 @@ var _ = Describe("Scheduler Jobs", func() {
 	Describe("delete-job", func() {
 		It("test correct job deletion", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).
+				Wait(time.Second * 10).Out.Contents()).
+				Should(ContainSubstring("OK"))
+
+			jobName := random_name.CATSRandomName("JOB-2")
+			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
+				Wait(time.Second * 10).Out.Contents()).
 				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("delete-job", jobName).
-				Wait(time.Second * 10)).
-				Should(ContainSubstring("OK"))
+				Wait(time.Second * 10).Out.Contents()).
+				Should(ContainSubstring("Deleted job")) // FIX ME
 
 			Expect(cf.Cf("jobs").
 				Wait(time.Second * 10).Out.Contents()).
 				ShouldNot(ContainSubstring(jobName))
 
-			Expect(cf.Cf("job-history", jobName).
-				Wait(time.Second * 10).Out.Contents()).
-				ShouldNot(ContainSubstring("OK"))
+			// Expect(cf.Cf("job-history", jobName).
+			// 	Wait(time.Second * 10).Out.Contents()).
+			// 	ShouldNot(ContainSubstring(jobName))
 		})
 	})
 
 	Describe("delete-job-schedule", func() {
 		It("test correct job schedule deletion", func() {
 			Expect(cf.Cf("create-job", appName, jobName, `pwd`).
-				Wait(time.Second * 10)).
+				Wait(time.Second * 10).Out.Contents()).
 				Should(ContainSubstring("OK"))
 
 			Expect(cf.Cf("schedule-job", jobName, `15 * * * *`).
-				Wait(time.Second * 10)).
-				Should(ContainSubstring("OK"))
+				Wait(time.Second * 10).Out.Contents()).
+				Should(ContainSubstring(jobName))
 
 			schedules := cf.Cf("job-schedules").
 				Wait(time.Second * 10)
 
-			Expect(schedules).
-				Should(ContainSubstring("OK"))
+			Expect(schedules.Out.Contents()).
+				Should(ContainSubstring(jobName))
 
 			var schedule string
 			re := regexp.MustCompile(`^(.*?)[\s]+(.*?)[\s]+([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})`)
@@ -111,12 +116,12 @@ var _ = Describe("Scheduler Jobs", func() {
 			Expect(schedule).NotTo(BeEmpty())
 
 			Expect(cf.Cf("delete-job-schedule", jobName, schedule).
-				Wait(time.Second * 10)).
-				Should(ContainSubstring("OK"))
+				Wait(time.Second * 10).Out.Contents()).
+				Should(ContainSubstring(schedule + " deleted")) // FIX ME
 
 			Expect(cf.Cf("job-schedules").
 				Wait(time.Second * 10).Out.Contents()).
-				ShouldNot(ContainSubstring(jobName))
+				ShouldNot(ContainSubstring(schedule))
 		})
 	})
 })
