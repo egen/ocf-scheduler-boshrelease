@@ -1,0 +1,5 @@
+---
+name: scheduler-cf-plugin
+
+files:
+- scheduler-cf-plugin/scheduler-cf-plugin-*-linux

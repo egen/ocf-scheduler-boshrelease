@@ -1,4 +1,8 @@
-scheduler/scheduler-v0.0.8.tar.gz:
-  size: 5271320
-  object_id: 157cf4af-f2f4-4b4f-6d61-c4097a0041f9
-  sha: sha256:0ce1373c5912bc72c7a08ff0830420840d595dfd3379d6dc33d5d114d60420af
+scheduler-cf-plugin/scheduler-cf-plugin-0.0.2-linux:
+  size: 7675642
+  object_id: 12ecda6c-2124-4d4e-4585-cdbacde69a33
+  sha: sha256:532602f7c590bde0a9bb05498025d3dc2486c0ce91a8d7787d021cf0f9261402
+scheduler/scheduler-v0.0.9.tar.gz:
+  size: 5271175
+  object_id: 35fb19db-6674-410d-78d7-75d38ea58a8e
+  sha: sha256:d7025c4aad1583eda968515648ba829a3526c72a3310d6c700682ec65dc1fc74

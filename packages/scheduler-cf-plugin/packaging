@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ex
+
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+
+cp scheduler-cf-plugin/scheduler-cf-plugin-*-linux ${BOSH_INSTALL_TARGET}/bin/scheduler-cf-plugin
+
+chmod +x ${BOSH_INSTALL_TARGET}/bin/scheduler-cf-plugin

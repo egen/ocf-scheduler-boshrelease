@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -eux
+
+mkdir ${BOSH_INSTALL_TARGET}/acceptance-tests
+
+cp -a acceptance-tests/* ${BOSH_INSTALL_TARGET}/acceptance-tests
+cp go.mod go.sum ${BOSH_INSTALL_TARGET}

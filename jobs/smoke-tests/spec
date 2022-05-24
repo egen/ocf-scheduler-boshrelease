@@ -1,0 +1,24 @@
+---
+name: smoke-tests
+
+templates:
+  run: bin/run
+  env.erb: env
+
+packages:
+- smoke-tests
+- golang-1.18-linux
+- cf-cli-8-linux
+- scheduler-cf-plugin
+
+properties: 
+  cf.api:
+    description: "Target CF API Endpoint"
+  cf.username:
+    description: "Target CF Username"
+  cf.password:
+    description: "Target CF Password"
+  cf.organization:
+    description: "Target CF Organization"
+  cf.space:
+    description: "Target CF Space"

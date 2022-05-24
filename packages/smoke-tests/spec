@@ -1,0 +1,13 @@
+---
+name: smoke-tests
+
+dependencies:
+- golang-1.18-linux
+- cf-cli-8-linux
+- scheduler-cf-plugin
+
+files:
+- acceptance-tests/*
+- acceptance-tests/assets/golang/*
+- go.mod
+- go.sum
