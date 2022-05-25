@@ -12,7 +12,7 @@ source /var/vcap/jobs/smoke-tests/env
 
 mkdir /var/vcap/jobs/smoke-tests/.cf
 export CF_HOME=/var/vcap/jobs/smoke-tests/.cf
-export MYSPACE="scheduler-smoke-tests-$(date +%s)"
+export CF_SPACE="scheduler-smoke-tests-$(date +%s)"
 
 ## SETUP
 
@@ -27,11 +27,11 @@ cf auth "${CF_USERNAME}" "${CF_PASSWORD}"
 cf target -o "${CF_ORGANIZATION}"
 
 # create space
-cf create-space "${MYSPACE}" -o "${CF_ORGANIZATION}"
+cf create-space "${CF_SPACE}" -o "${CF_ORGANIZATION}"
 
 # target space
 
-cf target -s "${MYSPACE}"
+cf target -s "${CF_SPACE}"
 
 ## TESTS
 
@@ -57,4 +57,4 @@ go test -timeout 600s ./...
 
 # delete space
 
-cf delete-space "${MYSPACE}" -o "${CF_ORGANIZATION}" -f
+cf delete-space "${CF_SPACE}" -o "${CF_ORGANIZATION}" -f
