@@ -12,8 +12,30 @@ source /var/vcap/jobs/smoke-tests/env
 
 mkdir /var/vcap/jobs/smoke-tests/.cf
 export CF_HOME=/var/vcap/jobs/smoke-tests/.cf
+export CF_SPACE="scheduler-smoke-tests-$(date +"%Y-%m-%dT%H:%M:%S")"
 
-cf login -a "$CF_ENDPOINT" -u "$CF_USERNAME" -p "$CF_PASSWORD" -o "$CF_ORGANIZATION" -s "$CF_SPACE" --skip-ssl-validation
+## SETUP
+
+# set the API
+cf api "${CF_ENDPOINT}" --skip-ssl-validation
+
+# do auth
+cf auth "${CF_USERNAME}" "${CF_PASSWORD}"
+
+# target org
+
+cf target -o "${CF_ORGANIZATION}"
+
+# create space
+cf create-space "${CF_SPACE}" -o "${CF_ORGANIZATION}"
+
+# target space
+
+cf target -s "${CF_SPACE}"
+
+## TESTS
+
+#cf login -a "$CF_ENDPOINT" -u "$CF_USERNAME" -p "$CF_PASSWORD" -o "$CF_ORGANIZATION" -s "$CF_SPACE" --skip-ssl-validation
 
 echo "==="
 echo "Setting up CF CLI plugin..."
@@ -29,3 +51,10 @@ echo "==="
 echo "Running all acceptance tests..."
 cd /var/vcap/packages/smoke-tests
 go test -timeout 600s ./...
+
+
+## TEARDOWN
+
+# delete space
+
+cf delete-space "${CF_SPACE}" -o "${CF_ORGANIZATION}" -f
