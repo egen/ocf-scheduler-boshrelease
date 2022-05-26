@@ -22,7 +22,7 @@ var _ = Describe("Scheduler Calls", func() {
 	})
 
 	AfterEach(func() {
-		Expect(cf.Cf("delete-call", callName).Wait().Out.Contents()).
+		Expect(cf.Cf("delete-call", callName).Wait(time.Second * 10).Out.Contents()).
 			Should(ContainSubstring("Deleted call")) // FIX ME
 	})
 
