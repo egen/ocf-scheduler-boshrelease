@@ -3,6 +3,9 @@
 set -eux
 
 mkdir ${BOSH_INSTALL_TARGET}/acceptance-tests
+mkdir ${BOSH_INSTALL_TARGET}/vendor
+
+cp go.mod go.sum ${BOSH_INSTALL_TARGET}
 
 cp -a acceptance-tests/* ${BOSH_INSTALL_TARGET}/acceptance-tests
-cp go.mod go.sum ${BOSH_INSTALL_TARGET}
+cp -a vendor/* ${BOSH_INSTALL_TARGET}/vendor
