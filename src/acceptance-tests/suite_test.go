@@ -32,5 +32,5 @@ var _ = BeforeSuite(func() {
 })
 
 var _ = AfterSuite(func() {
-	Expect(cf.Cf("delete", appName, "-f", "-r").Wait()).To(Exit(0))
+	Expect(cf.Cf("delete", appName, "-f", "-r").Wait(time.Second * 60)).To(Exit(0))
 })
