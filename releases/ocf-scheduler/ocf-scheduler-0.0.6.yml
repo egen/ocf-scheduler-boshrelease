@@ -1,0 +1,49 @@
+name: ocf-scheduler
+version: 0.0.6
+commit_hash: 01c75fb
+uncommitted_changes: false
+jobs:
+- name: scheduler
+  version: 715a2b86a497d7e5ac0d7c540831d0f3192559483512763cdac39ab2976290d6
+  fingerprint: 715a2b86a497d7e5ac0d7c540831d0f3192559483512763cdac39ab2976290d6
+  sha1: sha256:c8fb3b6f2381d3f507a1868041984fd6619bf2881218ae6db8f7463a49dc538b
+  packages:
+  - scheduler
+- name: smoke-tests
+  version: 317aa46eb32495c5542cff516feb0e160de2f51ebeefbdc58e6cb6c11da127a3
+  fingerprint: 317aa46eb32495c5542cff516feb0e160de2f51ebeefbdc58e6cb6c11da127a3
+  sha1: sha256:f50e1ad0a8568840310d2e9f52009ff23fede1f878d8eea8272045aeb30d18d4
+  packages:
+  - smoke-tests
+  - golang-1.18-linux
+  - cf-cli-8-linux
+  - scheduler-cf-plugin
+packages:
+- name: cf-cli-8-linux
+  version: afd6c74232fe4a51bcca5eb3e72821718fa2173f
+  fingerprint: afd6c74232fe4a51bcca5eb3e72821718fa2173f
+  sha1: 743ab1fb9b04aa50f0d62e66dddd1f9c3a97d4d2
+  dependencies: []
+- name: golang-1.18-linux
+  version: b5a928749901147d938ab2ae2d09d2245fae5768a8b1b7fb4bdff554f4c247e8
+  fingerprint: b5a928749901147d938ab2ae2d09d2245fae5768a8b1b7fb4bdff554f4c247e8
+  sha1: sha256:d0d07eb35c966f5f08c925b75f73fd54be10b54a2b1f99085e27644aa0f7f503
+  dependencies: []
+- name: scheduler
+  version: 3eabb7e44461a1ed9e62f3fc60fa5dad827575aaaf0b73f56319db4e2f03f404
+  fingerprint: 3eabb7e44461a1ed9e62f3fc60fa5dad827575aaaf0b73f56319db4e2f03f404
+  sha1: sha256:7b3edd5f1bc98d4a3bc8b25705c6fa357f5f0f8f576a759acdc267b9095109c8
+  dependencies: []
+- name: scheduler-cf-plugin
+  version: 1037a1c74961c6ec5c0c1b6a07c125ec971d8ce635c4d95ee01de9ce8e2095d1
+  fingerprint: 1037a1c74961c6ec5c0c1b6a07c125ec971d8ce635c4d95ee01de9ce8e2095d1
+  sha1: sha256:3e9d187aae489856ee31ae0dbce0712c204c92dffa85bc62a847d3c6a8453986
+  dependencies: []
+- name: smoke-tests
+  version: d0cd5a0370e6d3d4dec852598f468241cedbdad5df1953dc91b3402339e5361a
+  fingerprint: d0cd5a0370e6d3d4dec852598f468241cedbdad5df1953dc91b3402339e5361a
+  sha1: sha256:c8262b62fb23ad927db607040106fae98be496e0c23acdf9e556012350cd74a8
+  dependencies:
+  - golang-1.18-linux
+  - cf-cli-8-linux
+  - scheduler-cf-plugin
