@@ -50,7 +50,7 @@ export CGO_ENABLED=0
 echo "==="
 echo "Running all acceptance tests..."
 cd /var/vcap/packages/smoke-tests
-go test -timeout 600s ./...
+go test -mod=vendor -timeout 600s ./...
 
 
 ## TEARDOWN

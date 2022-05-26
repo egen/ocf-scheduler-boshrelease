@@ -7,7 +7,7 @@ dependencies:
 - scheduler-cf-plugin
 
 files:
-- acceptance-tests/*
-- acceptance-tests/assets/golang/*
+- acceptance-tests/**
+- vendor/**
 - go.mod
 - go.sum
